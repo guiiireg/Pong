@@ -12,8 +12,26 @@ Un interpréteur complet pour le langage de programmation .pong, implémenté en
 - **Corrections de bugs:** 1.0.0 → 1.0.1 (version de patch)
 - **Mises à jour majeures:** 1.x.x → 2.0.0 (version majeure)
 
-## Installation Rapide
+## Gestion de Version et Git
 
+Le projet utilise un système de versioning sémantique et des commandes Make pour simplifier la gestion Git :
+
+### Commandes Git intégrées
+```bash
+make git-init      # Initialiser le repository Git
+make git-setup     # Configuration complète avec premier commit
+make git-status    # Afficher le statut du repository
+make git-push      # Ajouter, committer et pousser les changements
+```
+
+### Gestion des versions
+```bash
+make version-bump-patch  # Pour les corrections de bugs (1.0.0 → 1.0.1)
+make version-bump-minor  # Pour les nouvelles fonctionnalités (1.0.0 → 1.1.0)
+make version-bump-major  # Pour les changements majeurs (1.x.x → 2.0.0)
+```
+
+### Première installation depuis GitHub
 ```bash
 git clone https://github.com/guiiireg/Pong.git
 cd Pong
@@ -93,17 +111,19 @@ Le projet est organisé en modules :
 ## Structure du Projet
 
 ```
-pong/
+Pong/
 ├── src/           # Code source (.c)
 ├── include/       # Headers (.h)
-├── build/         # Fichiers compilés
+├── build/         # Fichiers compilés (généré)
 ├── examples/      # Exemples de code .pong
-├── lib/           # Bibliothèques (future extension)
 ├── tests/         # Tests unitaires (future extension)
-└── Makefile       # Script de compilation
+├── Makefile       # Système de build complet
+├── README.md      # Documentation du projet
+├── LICENSE        # Licence MIT
+└── .gitignore     # Fichiers à ignorer par Git
 ```
 
-## Gestion d'Erreurs
+## Développement
 
 L'interpréteur détecte et rapporte :
 - Erreurs de syntaxe
