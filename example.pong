@@ -1,0 +1,9 @@
+int age = 25;
+string firstname = "John";
+string lastname = "Doe";
+char grade = 'A';
+
+age = 30;
+firstname = "Jane";
+lastname = "Smith";
+grade = 'B';

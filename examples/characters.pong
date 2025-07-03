@@ -1,0 +1,6 @@
+char first = 'A';
+char second = 'B';
+char third = 'C';
+first = 'X';
+second = 'Y';
+third = 'Z';

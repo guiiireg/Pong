@@ -1,0 +1,46 @@
+# Build artifacts
+build/
+*.o
+*.d
+*.a
+*.so
+*.so.*
+
+# Coverage files
+*.gcov
+*.gcda
+*.gcno
+coverage.info
+
+# Debug files
+core
+vgcore.*
+*.log
+
+# Editor files
+.vscode/
+*.swp
+*.tmp
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.idea/
+*.iml
+
+# Documentation generated files
+docs/generated/
+html/
+latex/
+
+# Temporary files
+*.bak
+*.orig
