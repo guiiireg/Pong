@@ -1,0 +1,137 @@
+name: ❓ Question
+description: Ask a question about the Pong interpreter
+title: "[QUESTION] "
+labels: ["question", "help-wanted"]
+assignees:
+  - guiiireg
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci de poser votre question ! Nous sommes là pour vous aider à comprendre et utiliser l'interpréteur Pong.
+        
+        **Avant de continuer, vérifiez :**
+        - [ ] Vous avez consulté le [README.md](https://github.com/guiiireg/Pong/blob/main/README.md)
+        - [ ] Votre question n'a pas déjà été posée dans les [issues existantes](https://github.com/guiiireg/Pong/issues)
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: 📂 Catégorie de la question
+      description: De quel type de question s'agit-il ?
+      options:
+        - "🚀 Installation et compilation"
+        - "📖 Syntaxe du langage .pong"
+        - "🔧 Utilisation de l'interpréteur"
+        - "🐛 Comportement inattendu"
+        - "⚡ Performance"
+        - "🏗️ Architecture du code"
+        - "🤝 Contribution au projet"
+        - "📚 Documentation"
+        - "🔍 Autre"
+    validations:
+      required: true
+
+  - type: textarea
+    id: question
+    attributes:
+      label: ❓ Votre question
+      description: Posez votre question de façon claire et détaillée
+      placeholder: |
+        Je voudrais savoir comment...
+        J'ai des difficultés à comprendre...
+        Pourquoi est-ce que...
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: 🎯 Contexte
+      description: Donnez plus de contexte sur votre situation
+      placeholder: |
+        Je travaille sur...
+        J'essaie de créer...
+        Mon objectif est de...
+
+  - type: textarea
+    id: attempted
+    attributes:
+      label: 🔍 Ce que vous avez déjà essayé
+      description: Quelles solutions avez-vous déjà tentées ?
+      placeholder: |
+        J'ai essayé...
+        J'ai lu...
+        J'ai testé...
+
+  - type: textarea
+    id: code-example
+    attributes:
+      label: 📝 Exemple de code (si applicable)
+      description: Si votre question concerne du code .pong spécifique
+      render: pong
+      placeholder: |
+        int x = 5;
+        string message = "hello";
+        // Votre code ici...
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: ✅ Comportement attendu
+      description: Que vous attendez-vous à voir se passer ?
+      placeholder: |
+        Je m'attends à ce que...
+        Le résultat devrait être...
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: ❌ Comportement observé
+      description: Que se passe-t-il réellement ?
+      placeholder: |
+        Au lieu de cela, je vois...
+        Le résultat est...
+
+  - type: dropdown
+    id: experience
+    attributes:
+      label: 📊 Votre niveau d'expérience
+      description: Quel est votre niveau avec l'interpréteur Pong ?
+      options:
+        - "🌱 Débutant - Je découvre le projet"
+        - "📈 Intermédiaire - J'ai quelques bases"
+        - "🎯 Avancé - Je connais bien le projet"
+        - "🔧 Expert - Je contribue au développement"
+
+  - type: dropdown
+    id: urgency
+    attributes:
+      label: ⏰ Urgence
+      description: À quel point cette question est-elle urgente ?
+      options:
+        - "🔴 Urgent - Bloque mon travail"
+        - "🟠 Important - Gêne mon avancement"
+        - "🟡 Normal - J'aimerais comprendre"
+        - "🟢 Pas pressé - Simple curiosité"
+
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: 📋 Informations supplémentaires
+      description: Toute autre information qui pourrait être utile
+      placeholder: |
+        - Configuration système
+        - Version utilisée
+        - Objectif du projet
+        - Contraintes particulières
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        **Merci pour votre question !** 🙏
+        
+        Nous ferons de notre mieux pour vous répondre rapidement et complètement.

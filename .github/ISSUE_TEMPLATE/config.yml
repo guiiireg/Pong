@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📚 Documentation
+    url: https://github.com/guiiireg/Pong/blob/main/README.md
+    about: Consultez la documentation complète du projet
+  - name: 💬 Discussions
+    url: https://github.com/guiiireg/Pong/discussions
+    about: Posez des questions générales et discutez avec la communauté
+  - name: 🔧 Support technique
+    url: https://github.com/guiiireg/Pong/wiki
+    about: Consultez le wiki pour des guides détaillés

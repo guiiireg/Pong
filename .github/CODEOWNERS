@@ -1,0 +1,27 @@
+# Code Owners for Pong Language Interpreter
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Global owners - These users will be requested for review when someone opens a pull request
+* @guiiireg
+
+# Core interpreter components
+/src/ @guiiireg
+/include/ @guiiireg
+
+# Build system and configuration
+/Makefile @guiiireg
+/.github/ @guiiireg
+
+# Documentation
+/README.md @guiiireg
+/CHANGELOG.md @guiiireg
+/LICENSE @guiiireg
+/.github/CONTRIBUTING.md @guiiireg
+
+# Examples and tests
+/examples/ @guiiireg
+/tests/ @guiiireg
+
+# Security-related files
+/.github/SECURITY.md @guiiireg
+/.github/workflows/ @guiiireg

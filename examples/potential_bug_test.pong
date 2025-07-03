@@ -1,0 +1,16 @@
+// Exemple de fichier .pong qui pourrait causer un bug
+// Ce fichier sera utilisé pour créer une issue de test
+
+int x = 10;
+string message = "test with special characters: éàü";
+char letter = 'A';
+
+// Test avec une très longue string
+string very_long_string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+
+// Test avec des caractères d'échappement
+string escape_test = "This contains \"quotes\" and \n newlines and \t tabs";
+
+// Variables avec des noms inhabituels
+int _underscore_var = 5;
+int var123 = 10;

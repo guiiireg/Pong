@@ -1,0 +1,156 @@
+name: ✨ Feature Request
+description: Suggest a new feature or enhancement for the Pong interpreter
+title: "[FEATURE] "
+labels: ["enhancement", "feature-request"]
+assignees:
+  - guiiireg
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci de proposer une nouvelle fonctionnalité ! Vos idées nous aident à améliorer l'interpréteur Pong.
+        
+        **Avant de continuer, assurez-vous que :**
+        - [ ] Cette fonctionnalité n'a pas déjà été proposée dans les [issues existantes](https://github.com/guiiireg/Pong/issues)
+        - [ ] Cette fonctionnalité correspond à l'objectif du projet
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 🎯 Problème à résoudre
+      description: Quel problème cette fonctionnalité résoudrait-elle ?
+      placeholder: |
+        Actuellement, il est difficile de...
+        Les utilisateurs ne peuvent pas...
+        Il serait utile de pouvoir...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: 💡 Solution proposée
+      description: Décrivez la fonctionnalité que vous aimeriez voir ajoutée.
+      placeholder: |
+        Je propose d'ajouter...
+        Cette fonctionnalité permettrait de...
+        L'utilisateur pourrait...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: 📂 Catégorie
+      description: Dans quelle catégorie cette fonctionnalité s'inscrit-elle ?
+      options:
+        - "Langage - Nouvelle syntaxe"
+        - "Langage - Nouveaux types"
+        - "Langage - Nouvelles opérations"
+        - "Interpréteur - Performance"
+        - "Interpréteur - Débogage"
+        - "Interpréteur - Messages d'erreur"
+        - "Outils - Build system"
+        - "Outils - Utilitaires"
+        - "Documentation"
+        - "Autre"
+    validations:
+      required: true
+
+  - type: textarea
+    id: syntax-example
+    attributes:
+      label: 📝 Exemple de syntaxe (si applicable)
+      description: Si c'est une nouvelle fonctionnalité du langage, montrez comment elle pourrait s'écrire
+      render: pong
+      placeholder: |
+        // Exemple de nouvelle syntaxe
+        for (int i = 0; i < 10; i++) {
+            print(i);
+        }
+        
+        // ou
+        
+        if (condition) {
+            // faire quelque chose
+        } else {
+            // faire autre chose
+        }
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 🔄 Alternatives considérées
+      description: Avez-vous pensé à d'autres façons de résoudre ce problème ?
+      placeholder: |
+        J'ai également pensé à...
+        Une autre approche pourrait être...
+        Cependant, cette solution serait mieux car...
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: ⚡ Priorité suggérée
+      description: Quelle est l'importance de cette fonctionnalité selon vous ?
+      options:
+        - "🔥 Critique - Nécessaire pour l'utilisabilité de base"
+        - "⚡ Élevée - Améliorerait significativement l'expérience"
+        - "📈 Moyenne - Fonctionnalité utile à avoir"
+        - "🎁 Faible - Nice-to-have"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: complexity
+    attributes:
+      label: 🛠️ Complexité estimée
+      description: Selon vous, quelle serait la complexité d'implémentation ?
+      options:
+        - "🟢 Simple - Petite modification"
+        - "🟡 Modérée - Quelques fichiers à modifier"
+        - "🟠 Complexe - Changements importants"
+        - "🔴 Très complexe - Refactoring majeur"
+        - "❓ Je ne sais pas"
+
+  - type: checkboxes
+    id: involvement
+    attributes:
+      label: 🤝 Votre implication
+      description: Comment aimeriez-vous contribuer à cette fonctionnalité ?
+      options:
+        - label: "Je suis prêt(e) à aider avec l'implémentation"
+        - label: "Je peux aider avec les tests"
+        - label: "Je peux aider avec la documentation"
+        - label: "Je peux fournir des exemples d'usage"
+        - label: "Je préfère juste proposer l'idée"
+
+  - type: textarea
+    id: use-cases
+    attributes:
+      label: 🎯 Cas d'usage
+      description: Dans quels contextes cette fonctionnalité serait-elle utilisée ?
+      placeholder: |
+        1. Quand un utilisateur veut...
+        2. Pour créer des programmes qui...
+        3. Dans le contexte de...
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: 📋 Contexte additionnel
+      description: Toute autre information pertinente
+      placeholder: |
+        - Références à d'autres langages ayant cette fonctionnalité
+        - Liens vers des ressources utiles
+        - Exemples de projets qui bénéficieraient de cette fonctionnalité
+        - Considérations techniques particulières
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        **Merci pour votre proposition !** 🙏
+        
+        Cette feature request sera évaluée et priorisée avec les autres améliorations du projet.

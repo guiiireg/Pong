@@ -1,0 +1,221 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        compiler: [gcc, clang]
+        build-type: [debug, release]
+        
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          build-essential \
+          valgrind \
+          cppcheck \
+          clang-format \
+          lcov \
+          clang
+          
+    - name: Setup compiler
+      run: |
+        if [ "${{ matrix.compiler }}" = "clang" ]; then
+          echo "CC=clang" >> $GITHUB_ENV
+        else
+          echo "CC=gcc" >> $GITHUB_ENV
+        fi
+        
+    - name: Show build info
+      run: |
+        make info
+        ${{ env.CC }} --version
+        
+    - name: Build project
+      run: |
+        make CONFIG=${{ matrix.build-type }} build
+        
+    - name: Run tests
+      run: |
+        make CONFIG=${{ matrix.build-type }} test
+        
+    - name: Test examples
+      run: |
+        make CONFIG=${{ matrix.build-type }} test-examples
+        
+    - name: Check code formatting (GCC only)
+      if: matrix.compiler == 'gcc'
+      run: |
+        make format-check
+        
+    - name: Run static analysis (GCC only)
+      if: matrix.compiler == 'gcc'
+      run: |
+        make analyze
+        
+    - name: Memory check with Valgrind (Debug GCC only)
+      if: matrix.compiler == 'gcc' && matrix.build-type == 'debug'
+      run: |
+        make valgrind-test
+        
+    - name: Generate coverage report (Debug GCC only)
+      if: matrix.compiler == 'gcc' && matrix.build-type == 'debug'
+      run: |
+        make CONFIG=coverage test-coverage
+        
+    - name: Upload coverage to Codecov (Debug GCC only)
+      if: matrix.compiler == 'gcc' && matrix.build-type == 'debug'
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.info
+        fail_ci_if_error: false
+        
+  style-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Install clang-format
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y clang-format
+        
+    - name: Check code style
+      run: |
+        make format-check
+        
+  security-scan:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Install security tools
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cppcheck
+        
+    - name: Run security analysis
+      run: |
+        make analyze
+        
+    - name: Run additional security checks
+      run: |
+        # Check for common security issues
+        grep -r "strcpy\|strcat\|sprintf\|gets" src/ && exit 1 || true
+        grep -r "system\|exec" src/ && exit 1 || true
+        
+  build-documentation:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Validate README
+      run: |
+        # Check if README contains required sections
+        grep -q "Installation" README.md
+        grep -q "Usage" README.md
+        grep -q "Examples" README.md
+        
+    - name: Check for broken links
+      uses: gaurav-nelson/github-action-markdown-link-check@v1
+      with:
+        use-quiet-mode: 'yes'
+        
+  compatibility-test:
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      matrix:
+        os: [ubuntu-20.04, ubuntu-22.04]
+        
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential
+        
+    - name: Build and test
+      run: |
+        make build
+        make test
+        
+  performance-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential time
+        
+    - name: Build release version
+      run: |
+        make CONFIG=release build
+        
+    - name: Run performance benchmark
+      run: |
+        # Create a large test file
+        echo "int x = 1;" > large_test.pong
+        for i in {1..1000}; do
+          echo "x = x + 1;" >> large_test.pong
+        done
+        
+        # Time the execution
+        /usr/bin/time -v ./build/bin/pong-interpreter large_test.pong
+        
+    - name: Check binary size
+      run: |
+        ls -lh build/bin/pong-interpreter
+        size build/bin/pong-interpreter
+        
+  release-build:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: [build-and-test, style-check, security-scan]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Build release artifacts
+      run: |
+        make CONFIG=release build
+        
+    - name: Create release archive
+      run: |
+        mkdir -p pong-interpreter-release
+        cp build/bin/pong-interpreter pong-interpreter-release/
+        cp README.md LICENSE CHANGELOG.md pong-interpreter-release/
+        cp -r examples pong-interpreter-release/
+        tar -czf pong-interpreter-linux-x64.tar.gz pong-interpreter-release/
+        
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: pong-interpreter-linux-x64
+        path: pong-interpreter-linux-x64.tar.gz
+        retention-days: 30

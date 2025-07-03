@@ -27,11 +27,6 @@ AUTHOR          := guiiireg
 DESCRIPTION     := Interpreter for the .pong programming language
 REPOSITORY      := https://github.com/guiiireg/Pong.git
 
-# Version scheme:
-# - Feature additions: 1.0.0 -> 1.1.0 (minor version bump)
-# - Bug fixes: 1.0.0 -> 1.0.1 (patch version bump)
-# - Major updates: 1.x.x -> 2.0.0 (major version bump)
-
 # ============================================================================
 # DIRECTORY STRUCTURE
 # ============================================================================
@@ -481,19 +476,6 @@ list-targets:
 	awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | \
 	sort | grep -E "^[a-zA-Z][^$$#/\t=]*$$"
 
-.PHONY: version-info
-version-info:
-	@echo "Version Information:"
-	@echo "==================="
-	@echo "Current version: $(VERSION)"
-	@echo ""
-	@echo "Version scheme:"
-	@echo "  Feature additions: x.X.x -> x.(X+1).0"
-	@echo "  Bug fixes: x.x.X -> x.x.(X+1)" 
-	@echo "  Major updates: X.x.x -> (X+1).0.0"
-	@echo ""
-	@echo "To update version, edit VERSION in Makefile"
-
 # ============================================================================
 # DEPENDENCY TRACKING
 # ============================================================================
@@ -515,7 +497,7 @@ $(OBJ_DIR)/%.d: $(SRC_DIR)/%.c | $(OBJ_DIR)
 .PHONY: all build debug release profile test test-build test-run test-examples
 .PHONY: test-coverage valgrind valgrind-test gdb analyze lint format format-check
 .PHONY: run-examples demo install install-user uninstall clean distclean
-.PHONY: info list-targets help version-info
+.PHONY: info list-targets help
 
 # Special variables
 .DEFAULT_GOAL := help

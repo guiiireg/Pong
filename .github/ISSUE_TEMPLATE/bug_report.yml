@@ -1,0 +1,149 @@
+name: 🐛 Bug Report
+description: Report a bug or unexpected behavior in the Pong interpreter
+title: "[BUG] "
+labels: ["bug", "triage"]
+assignees:
+  - guiiireg
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci de signaler ce bug ! Cela nous aide à améliorer l'interpréteur Pong.
+        
+        **Avant de continuer, assurez-vous que :**
+        - [ ] Vous avez la dernière version du projet
+        - [ ] Ce bug n'a pas déjà été reporté dans les [issues existantes](https://github.com/guiiireg/Pong/issues)
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 Description du bug
+      description: Une description claire et concise du problème rencontré.
+      placeholder: Décrivez ce qui ne fonctionne pas comme attendu...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 🔄 Étapes pour reproduire
+      description: Comment reproduire ce bug étape par étape.
+      placeholder: |
+        1. Compilez avec `make build`
+        2. Exécutez `./build/bin/pong-interpreter examples/bug.pong`
+        3. Observez l'erreur...
+      value: |
+        1. 
+        2. 
+        3. 
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: ✅ Comportement attendu
+      description: Que devrait-il se passer normalement ?
+      placeholder: L'interpréteur devrait...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: ❌ Comportement observé
+      description: Que se passe-t-il réellement ?
+      placeholder: Au lieu de cela, l'interpréteur...
+    validations:
+      required: true
+
+  - type: textarea
+    id: pong-code
+    attributes:
+      label: 📄 Code .pong problématique
+      description: Le code .pong qui cause le problème (si applicable)
+      render: pong
+      placeholder: |
+        int x = 5;
+        string message = "hello";
+        // Code qui cause le bug...
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 📋 Logs et messages d'erreur
+      description: Copiez-collez les messages d'erreur ou la sortie du terminal
+      render: shell
+      placeholder: |
+        $ ./build/bin/pong-interpreter examples/test.pong
+        Error: ...
+
+  - type: dropdown
+    id: version
+    attributes:
+      label: 🏷️ Version
+      description: Quelle version du projet utilisez-vous ?
+      options:
+        - "1.0.0 (latest)"
+        - "0.9.x (older)"
+        - "main branch (development)"
+        - "Je ne sais pas"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: 💻 Système d'exploitation
+      options:
+        - "Linux (Ubuntu/Debian)"
+        - "Linux (CentOS/RHEL)"
+        - "Linux (Arch)"
+        - "Linux (autre)"
+        - "macOS"
+        - "Windows (WSL)"
+        - "Windows (MinGW)"
+        - "Autre"
+    validations:
+      required: true
+
+  - type: input
+    id: compiler
+    attributes:
+      label: 🔧 Version du compilateur
+      description: "Résultat de `gcc --version` ou `clang --version`"
+      placeholder: "gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: tests
+    attributes:
+      label: ✔️ Tests effectués
+      description: Quels tests avez-vous déjà essayés ?
+      options:
+        - label: "J'ai essayé `make clean && make build`"
+        - label: "J'ai testé avec d'autres fichiers .pong"
+        - label: "J'ai vérifié que les exemples de base fonctionnent"
+        - label: "J'ai consulté la documentation"
+
+  - type: textarea
+    id: context
+    attributes:
+      label: 🔍 Contexte additionnel
+      description: Toute autre information qui pourrait aider à résoudre ce bug
+      placeholder: |
+        - Configuration particulière
+        - Environnement de développement
+        - Dépendances installées
+        - Autres détails pertinents...
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        **Merci pour votre contribution !** 🙏
+        
+        Une fois cette issue créée, elle sera triée et assignée. N'hésitez pas à fournir des informations supplémentaires si nécessaire.
