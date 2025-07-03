@@ -24,12 +24,21 @@ fi
 # Vérifier que Git est initialisé
 if [ ! -d ".git" ]; then
     echo "📝 Initialisation de Git..."
-    make git-init
+    git init
+    git branch -M main
 fi
 
 # Vérifier le statut Git
 echo "📊 Statut du repository:"
-make git-status
+if [ -d ".git" ]; then
+    echo "Branch: $(git branch --show-current 2>/dev/null || echo 'Not on any branch')"
+    echo "Remote: $(git remote get-url origin 2>/dev/null || echo 'No remote configured')"
+    echo ""
+    echo "Status:"
+    git status --short
+else
+    echo "Git repository not initialized"
+fi
 echo ""
 
 # Construire le projet pour vérifier que tout fonctionne

@@ -14,21 +14,20 @@ Un interpréteur complet pour le langage de programmation .pong, implémenté en
 
 ## Gestion de Version et Git
 
-Le projet utilise un système de versioning sémantique et des commandes Make pour simplifier la gestion Git :
+Le projet utilise un système de versioning sémantique. La gestion Git est séparée du système de build :
 
-### Commandes Git intégrées
+### Configuration Git initiale
 ```bash
-make git-init      # Initialiser le repository Git
-make git-setup     # Configuration complète avec premier commit
-make git-status    # Afficher le statut du repository
-make git-push      # Ajouter, committer et pousser les changements
+./setup-github.sh    # Script d'initialisation automatique
 ```
 
 ### Gestion des versions
+- **Fonctionnalités :** 1.0.0 → 1.1.0 (modifier VERSION dans Makefile)
+- **Corrections :** 1.0.0 → 1.0.1 (modifier VERSION dans Makefile)  
+- **Changements majeurs :** 1.x.x → 2.0.0 (modifier VERSION dans Makefile)
+
 ```bash
-make version-bump-patch  # Pour les corrections de bugs (1.0.0 → 1.0.1)
-make version-bump-minor  # Pour les nouvelles fonctionnalités (1.0.0 → 1.1.0)
-make version-bump-major  # Pour les changements majeurs (1.x.x → 2.0.0)
+make version-info     # Afficher les informations de version
 ```
 
 ### Première installation depuis GitHub

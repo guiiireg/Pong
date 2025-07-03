@@ -156,13 +156,6 @@ help:
 	@echo "  run-examples      - Run all example .pong programs"
 	@echo "  demo              - Run demonstration of interpreter features"
 	@echo ""
-	@echo "GIT AND VERSIONING:"
-	@echo "  git-init          - Initialize Git repository"
-	@echo "  git-setup         - Complete Git setup with first commit"
-	@echo "  git-status        - Show Git repository status"
-	@echo "  git-push          - Add, commit and push changes"
-	@echo "  version-bump-*    - Show version bump instructions"
-	@echo ""
 	@echo "BUILD CONFIGURATIONS:"
 	@echo "  CONFIG=debug      - Debug build (default)"
 	@echo "  CONFIG=release    - Release build"
@@ -488,95 +481,18 @@ list-targets:
 	awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | \
 	sort | grep -E "^[a-zA-Z][^$$#/\t=]*$$"
 
-# ============================================================================
-# GIT AND REPOSITORY MANAGEMENT
-# ============================================================================
-
-.PHONY: git-init
-git-init:
-	@echo "Initializing Git repository:"
-	@echo "============================"
-	@if [ ! -d .git ]; then \
-		git init; \
-		echo "✓ Git repository initialized"; \
-	else \
-		echo "Git repository already exists"; \
-	fi
+.PHONY: version-info
+version-info:
+	@echo "Version Information:"
+	@echo "==================="
+	@echo "Current version: $(VERSION)"
 	@echo ""
-	@echo "Repository URL: $(REPOSITORY)"
-	@echo "To complete setup, run: make git-setup"
-
-.PHONY: git-setup
-git-setup: git-init
-	@echo "Setting up Git repository:"
-	@echo "========================="
-	@git add .
-	@git commit -m "Initial commit - Pong Language Interpreter v$(VERSION)"
-	@git branch -M main
-	@if git remote | grep -q origin; then \
-		echo "Remote 'origin' already exists"; \
-	else \
-		git remote add origin $(REPOSITORY); \
-		echo "✓ Added remote origin: $(REPOSITORY)"; \
-	fi
+	@echo "Version scheme:"
+	@echo "  Feature additions: x.X.x -> x.(X+1).0"
+	@echo "  Bug fixes: x.x.X -> x.x.(X+1)" 
+	@echo "  Major updates: X.x.x -> (X+1).0.0"
 	@echo ""
-	@echo "To push to GitHub:"
-	@echo "  git push -u origin main"
-
-.PHONY: git-status
-git-status:
-	@echo "Git Repository Status:"
-	@echo "====================="
-	@echo "Project: $(PROJECT_NAME) v$(VERSION)"
-	@echo "Author:  $(AUTHOR)"
-	@if [ -d .git ]; then \
-		echo "Branch:  $$(git branch --show-current 2>/dev/null || echo 'Not on any branch')"; \
-		echo "Remote:  $$(git remote get-url origin 2>/dev/null || echo 'No remote configured')"; \
-		echo ""; \
-		echo "Status:"; \
-		git status --short; \
-	else \
-		echo "Git repository not initialized"; \
-		echo "Run 'make git-init' to initialize"; \
-	fi
-
-.PHONY: git-push
-git-push:
-	@echo "Pushing to repository:"
-	@echo "====================="
-	@git add .
-	@if git diff --staged --quiet; then \
-		echo "No changes to commit"; \
-	else \
-		echo "Enter commit message:"; \
-		read -p "> " message; \
-		git commit -m "$$message"; \
-	fi
-	@git push
-
-.PHONY: version-bump-patch
-version-bump-patch:
-	@echo "Bumping patch version (bug fix):"
-	@echo "================================"
-	@echo "Current version: $(VERSION)"
-	@echo "This will increment: x.x.X -> x.x.(X+1)"
-	@echo "Remember to update VERSION in Makefile manually"
-
-.PHONY: version-bump-minor
-version-bump-minor:
-	@echo "Bumping minor version (new feature):"
-	@echo "===================================="
-	@echo "Current version: $(VERSION)"
-	@echo "This will increment: x.X.x -> x.(X+1).0"
-	@echo "Remember to update VERSION in Makefile manually"
-
-.PHONY: version-bump-major
-version-bump-major:
-	@echo "Bumping major version (breaking changes):"
-	@echo "========================================="
-	@echo "Current version: $(VERSION)"
-	@echo "This will increment: X.x.x -> (X+1).0.0"
-	@echo "Remember to update VERSION in Makefile manually"
+	@echo "To update version, edit VERSION in Makefile"
 
 # ============================================================================
 # DEPENDENCY TRACKING
@@ -599,8 +515,7 @@ $(OBJ_DIR)/%.d: $(SRC_DIR)/%.c | $(OBJ_DIR)
 .PHONY: all build debug release profile test test-build test-run test-examples
 .PHONY: test-coverage valgrind valgrind-test gdb analyze lint format format-check
 .PHONY: run-examples demo install install-user uninstall clean distclean
-.PHONY: info list-targets help git-init git-setup git-status git-push
-.PHONY: version-bump-patch version-bump-minor version-bump-major
+.PHONY: info list-targets help version-info
 
 # Special variables
 .DEFAULT_GOAL := help
